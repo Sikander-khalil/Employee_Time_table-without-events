@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>main.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.dart</font>
+</center></td></tr></table>
+<pre>
+<span class="s0">import </span><span class="s1">'package:flutter/cupertino.dart'</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">'package:flutter/material.dart'</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter/services.dart'</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">'package:flutter_clean_calendar/flutter_clean_calendar.dart'</span><span class="s0">;</span>
+
+
+
+<span class="s2">void </span><span class="s0">main() {</span>
+  <span class="s0">WidgetsFlutterBinding.ensureInitialized();</span>
+  <span class="s0">SystemChrome.setPreferredOrientations([</span>
+    <span class="s0">DeviceOrientation.portraitUp,</span>
+    <span class="s0">DeviceOrientation.portraitDown,</span>
+  <span class="s0">]);</span>
+  <span class="s0">runApp(MyApp());</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">MyApp </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s0">@override</span>
+  <span class="s0">_MyAppState createState() =&gt; _MyAppState();</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_MyAppState </span><span class="s2">extends </span><span class="s0">State&lt;MyApp&gt; {</span>
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">MaterialApp(</span>
+      <span class="s0">debugShowCheckedModeBanner: </span><span class="s2">false</span><span class="s0">,</span>
+      <span class="s0">home: DemoApp(),</span>
+    <span class="s0">);</span>
+  <span class="s0">}</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">DemoApp </span><span class="s2">extends </span><span class="s0">StatefulWidget {</span>
+  <span class="s0">@override</span>
+  <span class="s0">_DemoAppState createState() =&gt; _DemoAppState();</span>
+<span class="s0">}</span>
+
+<span class="s2">class </span><span class="s0">_DemoAppState </span><span class="s2">extends </span><span class="s0">State&lt;DemoApp&gt; {</span>
+
+   <span class="s0">DateTime selectedDay;</span>
+   <span class="s0">List &lt;CleanCalendarEvent&gt; selectedEvent;</span>
+
+  <span class="s2">final </span><span class="s0">Map&lt;DateTime,List&lt;CleanCalendarEvent&gt;&gt; events = {</span>
+    <span class="s0">DateTime (DateTime.now().year,DateTime.now().month,DateTime.now().day+</span><span class="s3">2</span><span class="s0">):</span>
+    <span class="s0">[</span>
+      <span class="s0">CleanCalendarEvent(</span><span class="s1">'Duty no 1'</span><span class="s0">,</span>
+          <span class="s0">startTime: DateTime(</span>
+              <span class="s0">DateTime.now().year,DateTime.now().month,DateTime.now().day,</span><span class="s3">10</span><span class="s0">,</span><span class="s3">0</span><span class="s0">),</span>
+          <span class="s0">endTime:  DateTime(</span>
+              <span class="s0">DateTime.now().year,DateTime.now().month,DateTime.now().day,</span><span class="s3">12</span><span class="s0">,</span><span class="s3">0</span><span class="s0">),</span>
+          <span class="s0">description: </span><span class="s1">'A special duty'</span><span class="s0">,</span>
+         <span class="s0">isAllDay: </span><span class="s2">true</span><span class="s0">,</span>
+
+          <span class="s0">color: Colors.blue),</span>
+    <span class="s0">],</span>
+
+    <span class="s0">DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + </span><span class="s3">1</span><span class="s0">):</span>
+    <span class="s0">[</span>
+      <span class="s0">CleanCalendarEvent(</span><span class="s1">'Duty no 2'</span><span class="s0">,</span>
+          <span class="s0">startTime: DateTime(DateTime.now().year, DateTime.now().month,</span>
+              <span class="s0">DateTime.now().day + </span><span class="s3">1</span><span class="s0">, </span><span class="s3">8</span><span class="s0">, </span><span class="s3">0</span><span class="s0">),</span>
+          <span class="s0">endTime: DateTime(DateTime.now().year, DateTime.now().month,</span>
+              <span class="s0">DateTime.now().day + </span><span class="s3">2</span><span class="s0">, </span><span class="s3">12</span><span class="s0">, </span><span class="s3">0</span><span class="s0">),</span>
+
+          <span class="s0">color: Colors.orange),</span>
+      <span class="s0">],</span>
+    <span class="s0">DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + </span><span class="s3">3</span><span class="s0">):</span>
+    <span class="s0">[</span>
+      <span class="s0">CleanCalendarEvent(</span><span class="s1">'Duty no 3'</span><span class="s0">,</span>
+          <span class="s0">startTime: DateTime(DateTime.now().year, DateTime.now().month,</span>
+              <span class="s0">DateTime.now().day + </span><span class="s3">3</span><span class="s0">, </span><span class="s3">14</span><span class="s0">, </span><span class="s3">30</span><span class="s0">),</span>
+          <span class="s0">endTime: DateTime(DateTime.now().year, DateTime.now().month,</span>
+              <span class="s0">DateTime.now().day + </span><span class="s3">2</span><span class="s0">, </span><span class="s3">17</span><span class="s0">, </span><span class="s3">0</span><span class="s0">),</span>
+          <span class="s0">color: Colors.yellow),</span>
+    <span class="s0">],</span>
+  <span class="s0">};</span>
+
+  <span class="s2">void </span><span class="s0">_handleData(date){</span>
+    <span class="s0">setState(() {</span>
+      <span class="s0">selectedDay = date;</span>
+      <span class="s0">selectedEvent = events[selectedDay] ?? [];</span>
+    <span class="s0">});</span>
+    <span class="s0">print(selectedDay);</span>
+  <span class="s0">}</span>
+  <span class="s0">@override</span>
+  <span class="s2">void </span><span class="s0">initState() {</span>
+    <span class="s4">// TODO: implement initState</span>
+
+    <span class="s0">selectedEvent = events[selectedDay] ?? [];</span>
+    <span class="s2">super</span><span class="s0">.initState();</span>
+  <span class="s0">}</span>
+
+  <span class="s0">@override</span>
+  <span class="s0">Widget build(BuildContext context) {</span>
+    <span class="s2">return </span><span class="s0">Scaffold(</span>
+
+      <span class="s0">appBar: AppBar(</span>
+        <span class="s0">title: Text(</span><span class="s1">'Calendar'</span><span class="s0">),</span>
+        <span class="s0">centerTitle: </span><span class="s2">true</span><span class="s0">,</span>
+      <span class="s0">),</span>
+
+
+        <span class="s0">body: SafeArea(</span>
+
+
+            <span class="s0">child: Container(</span>
+
+              <span class="s0">child: Calendar(</span>
+
+                <span class="s0">startOnMonday: </span><span class="s2">true</span><span class="s0">,</span>
+                <span class="s0">selectedColor: Colors.blue,</span>
+                <span class="s0">todayColor: Colors.red,</span>
+                <span class="s0">eventColor: Colors.green,</span>
+                <span class="s0">eventDoneColor: Colors.amber,</span>
+                <span class="s0">bottomBarColor: Colors.deepOrange,</span>
+                <span class="s0">onRangeSelected: (range) {</span>
+                  <span class="s0">print(</span><span class="s1">'selected Day </span><span class="s0">${range.from}</span><span class="s1">,</span><span class="s0">${range.to}</span><span class="s1">'</span><span class="s0">);</span>
+                <span class="s0">},</span>
+                <span class="s0">onDateSelected: (date){</span>
+                  <span class="s2">return </span><span class="s0">_handleData(date);</span>
+                <span class="s0">},</span>
+                <span class="s0">events: events,</span>
+                <span class="s0">isExpanded: </span><span class="s2">true</span><span class="s0">,</span>
+
+                <span class="s0">dayOfWeekStyle: TextStyle(</span>
+                  <span class="s0">fontSize: </span><span class="s3">15</span><span class="s0">,</span>
+                  <span class="s0">color: Colors.black,</span>
+                  <span class="s0">fontWeight: FontWeight.bold,</span>
+                <span class="s0">),</span>
+                <span class="s0">bottomBarTextStyle: TextStyle(</span>
+                  <span class="s0">color: Colors.white,</span>
+                <span class="s0">),</span>
+                <span class="s0">hideBottomBar: </span><span class="s2">false</span><span class="s0">,</span>
+                <span class="s0">hideArrows: </span><span class="s2">false</span><span class="s0">,</span>
+                <span class="s0">weekDays: [</span><span class="s1">'Mon'</span><span class="s0">,</span><span class="s1">'Tue'</span><span class="s0">,</span><span class="s1">'Wed'</span><span class="s0">,</span><span class="s1">'Thu'</span><span class="s0">,</span><span class="s1">'Fri'</span><span class="s0">,</span><span class="s1">'Sat'</span><span class="s0">,</span><span class="s1">'Sun'</span><span class="s0">],</span>
+              <span class="s0">),</span>
+            <span class="s0">),</span>
+
+        <span class="s0">),</span>
+
+    <span class="s0">);</span>
+  <span class="s0">}</span>
+
+<span class="s0">}</span>
+</pre>
+</body>
+</html>
